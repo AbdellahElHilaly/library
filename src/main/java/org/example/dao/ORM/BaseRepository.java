@@ -7,7 +7,7 @@ import org.example.dao.database.quiry.PostgresqlQueries;
 
 import java.sql.SQLException;
 
-public  class BaseRepository<T> extends CrudOperations<T> {
+public  class BaseRepository<T> extends RelationalRepository<T> {
 
     public BaseRepository(Class<T> modelClass) {
         super(modelClass);
@@ -34,9 +34,19 @@ public  class BaseRepository<T> extends CrudOperations<T> {
             PrintHelper.printInfoMessage("Adding column " + field[1] + " to table " + tableName + "...................................");
             this.statement.execute(DaoHelper.getAddColumnQuery(tableName, field[0], field[1]));
             PrintHelper.printSuccessMessage("Column " + field[1] + " added successfully");
+
+            if (DaoHelper.isRelationalField(field[1])) {
+                PrintHelper.printInfoMessage("Attaching table " + field[1] + " to table " + tableName + "...................................");
+                this.attachingTables(field[1]);
+                PrintHelper.printSuccessMessage("Table " + field[1] + " attached successfully");
+            }
         }
+
+
+
         fields = null;
 
     }
+
 
 }

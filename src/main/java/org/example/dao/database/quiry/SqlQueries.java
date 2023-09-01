@@ -82,4 +82,14 @@ public abstract class SqlQueries {
 
         return String.format("UPDATE %s SET %s WHERE id = %d", tableName, updateFields, id);
     }
+
+
+    public String createForeignKey(String firstTableName, String secondTableName) {
+        return "ALTER TABLE " + firstTableName +
+                " ADD CONSTRAINT FK_" + firstTableName + "_" + secondTableName +
+                " FOREIGN KEY (" + secondTableName + "_id) REFERENCES " + secondTableName + "(id)";
+    }
+
+
+
 }

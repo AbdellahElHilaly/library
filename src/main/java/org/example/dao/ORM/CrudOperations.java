@@ -77,14 +77,12 @@ public class CrudOperations<T> {
     }
 
 
-
     public ResultSet update(T model, int id) {
         try {
             this.findOrThrow(id);
             String[][] fields = DaoHelper.getClassFields(modelClass);
             String[] values = DaoHelper.getClassValues(model);
             String query = Factory.getSqlQueries().update(tableName, fields, values, id);
-            System.out.println(query);
             this.statement.execute(query);
             fields = null;values = null;query = null;
             return this.findOrThrow(id);
@@ -92,6 +90,7 @@ public class CrudOperations<T> {
             throw new RuntimeException(e);
         }
     }
+
 
     private ResultSet findOrThrow(int id) throws SQLException {
         resultSet = this.statement.executeQuery(Factory.getSqlQueries().selectById(tableName, id));

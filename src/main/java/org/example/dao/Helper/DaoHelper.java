@@ -3,6 +3,7 @@ package org.example.dao.Helper;
 import org.example.dao.Type.Paragraph;
 import org.example.dao.Type.Text;
 import org.example.dao.database.quiry.PostgresqlQueries;
+import org.example.util.enums.BookStatus;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -62,8 +63,7 @@ public class DaoHelper {
             case "Paragraph":
                 return Factory.getSqlQueries().addParagraphColumnIfNotExists(tableName, ColumnName);
             default:
-                PrintHelper.printErrorMessage("Unknown data type");
-                return null;
+                return Factory.getSqlQueries().addStringColumnIfNotExists(tableName, ColumnName);
         }
     }
 
@@ -116,9 +116,6 @@ public class DaoHelper {
     }
 
 
-
-
-
     private static <T> Object handleNullableValue(T instance, Field field, Object value) {
         if (value == null) {
             Class<?> fieldType = field.getType();
@@ -150,7 +147,13 @@ public class DaoHelper {
         return value;
     }
 
+    public static boolean isRelationalField(String fieldName) {
+        return fieldName.contains("_id");
+    }
 
 
+    public static String getTableNameFromRelationalField(String fieldName) {
+        return fieldName.substring(0, fieldName.length() - 3);
+    }
 }
 
