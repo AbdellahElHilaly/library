@@ -2,8 +2,6 @@ package org.example.dao.Helper;
 
 import org.example.dao.Type.Paragraph;
 import org.example.dao.Type.Text;
-import org.example.dao.database.quiry.PostgresqlQueries;
-import org.example.util.enums.BookStatus;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

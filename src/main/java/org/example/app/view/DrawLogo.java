@@ -1,6 +1,6 @@
 package org.example.app.view;
 
-import org.example.app.Helper.Printer;
+import org.example.app.shared.Helper.Printer;
 
 public class DrawLogo extends Printer {
 
@@ -45,8 +45,12 @@ public class DrawLogo extends Printer {
             "|_| |_|",
     };
 
-    private  static   String[] Y = {
-
+    private static String[] Y = {
+            " _   _ ",
+            " \\_/\\/",
+            "  | |  ",
+            "  | |  ",
+            "  |_|  ",
     };
 
 
@@ -61,7 +65,7 @@ public class DrawLogo extends Printer {
 
         tempColor = "green";
         for (int i = 0; i < 5; i++) {
-            print(L[i] + " " + I[i] + " " + B[i] + " " + R[i] + " " + A[i] + " " + R[i] + " " + I[i]);
+            print(L[i] + " " + I[i] + " " + B[i] + " " + R[i] + " " + A[i] + " " + R[i] + " " + Y[i]);
             System.out.println();
         }
         tempColor = "cyan";

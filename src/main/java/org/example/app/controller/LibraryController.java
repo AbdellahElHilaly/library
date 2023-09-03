@@ -1,9 +1,7 @@
 package org.example.app.controller;
 
-import org.example.app.model.Library;
-import org.example.app.service.impl.LibraryService;
-
-import java.sql.SQLException;
+import org.example.app.mrs.model.Library;
+import org.example.app.mrs.service.impl.LibraryService;
 
 public class LibraryController {
     static LibraryService libraryService = new LibraryService();
@@ -12,8 +10,8 @@ public class LibraryController {
         return !libraryService.selectAll().isEmpty();
     }
 
-
     public static void initialize(Library library) {
         libraryService.save(library);
     }
+
 }

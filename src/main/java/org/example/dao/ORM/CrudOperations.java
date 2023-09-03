@@ -3,7 +3,6 @@ package org.example.dao.ORM;
 import org.example.dao.Helper.DaoHelper;
 import org.example.dao.Helper.Factory;
 import org.example.dao.database.connection.Connection;
-import org.example.dao.database.quiry.PostgresqlQueries;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

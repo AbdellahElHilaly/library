@@ -1,9 +1,9 @@
 package org.example.app.view;
 
-import org.example.app.Helper.Printer;
-import org.example.app.Helper.ViewHelper;
+import org.example.app.shared.Helper.Printer;
+import org.example.app.shared.Helper.ViewHelper;
 import org.example.app.controller.LibraryController;
-import org.example.app.model.Library;
+import org.example.app.mrs.model.Library;
 
 public class Initialize {
 

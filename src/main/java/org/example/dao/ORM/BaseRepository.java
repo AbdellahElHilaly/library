@@ -3,7 +3,8 @@ package org.example.dao.ORM;
 import org.example.dao.Helper.Factory;
 import org.example.dao.Helper.PrintHelper;
 import org.example.dao.Helper.DaoHelper;
-import org.example.dao.database.quiry.PostgresqlQueries;
+import org.example.dao.utils.config.AppConfig;
+import org.example.dao.utils.enums.AppMood;
 
 import java.sql.SQLException;
 
@@ -12,8 +13,10 @@ public  class BaseRepository<T> extends RelationalRepository<T> {
     public BaseRepository(Class<T> modelClass) {
         super(modelClass);
         try {
-            this.createTable();
-            this.addColumns();
+            if(AppConfig.APP_MOOD.equals(AppMood.Development.name())){
+                this.createTable();
+                this.addColumns();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
