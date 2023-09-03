@@ -10,29 +10,30 @@ import java.util.List;
 public class BorrowerService implements CrudService<Borrower> {
     private final Borrower borrower = new Borrower();
     private final BorrowerRepository borrowerRepository = new BorrowerRepository();
-    @Override
-    public Borrower save(Borrower borrower) throws SQLException {
-        return borrower.mapData(borrowerRepository.save(borrower));
-    }
+
 
     @Override
-    public Borrower select(int id) throws SQLException {
+    public Borrower save(Borrower borrower) {
         return null;
     }
 
     @Override
-    public List<Borrower> selectAll() throws SQLException {
+    public Borrower select(int id) {
         return null;
     }
 
     @Override
-    public Borrower update(Borrower borrower, int id) throws SQLException {
+    public List<Borrower> selectAll() {
         return null;
     }
 
     @Override
-    public void delete(int id) throws SQLException {
-
+    public Borrower update(Borrower borrower, int id) {
+        return null;
     }
 
+    @Override
+    public void delete(int id) {
+
+    }
 }

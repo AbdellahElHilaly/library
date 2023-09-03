@@ -11,29 +11,40 @@ public abstract class ModelMapper<T> {
     private T instance;
     private final List<T> dataList = new ArrayList<>();
 
-    public T mapData(ResultSet resultSet) throws SQLException {
-        instance = createInstance();
+    public T mapData(ResultSet resultSet) {
 
-        ResultSetMetaData rsmd = resultSet.getMetaData();
-        int columnsNumber = rsmd.getColumnCount();
+        try {
+            instance = createInstance();
 
-        for (int i = 1; i <= columnsNumber; i++) {
-            String columnName = rsmd.getColumnName(i);
-            Object columnValue = resultSet.getObject(i);
+            ResultSetMetaData rsmd = null;
 
-            try {
+            rsmd = resultSet.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+
+            for (int i = 1; i <= columnsNumber; i++) {
+                String columnName = rsmd.getColumnName(i);
+                Object columnValue = resultSet.getObject(i);
+
                 DaoHelper.setFieldByName(instance, columnName, columnValue); //pass instance by reference
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
             }
-        }
-        rsmd = null;
+            rsmd = null;
 
-        return instance;
+            return instance;
+
+
+        } catch (SQLException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
-    public List<T> mapDataList(ResultSet resultSet) throws SQLException {
-        while (resultSet.next()) {
+    public List<T> mapDataList(ResultSet resultSet)  {
+        while (true) {
+            try {
+                if (!resultSet.next()) break;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             instance = createInstance();
             instance = mapData(resultSet);
             this.dataList.add(instance);

@@ -5,14 +5,14 @@ import java.util.List;
 
 public interface CrudService<T> {
 
-    T save(T t) throws SQLException;
+    T save(T t) ;
 
-    T select(int id) throws SQLException;
+    T select(int id);
 
-    List<T> selectAll() throws SQLException;
+    List<T> selectAll() ;
 
-    T update(T t, int id) throws SQLException;
+    T update(T t, int id) ;
 
-    void delete(int id) throws SQLException;
+    void delete(int id) ;
 
 }

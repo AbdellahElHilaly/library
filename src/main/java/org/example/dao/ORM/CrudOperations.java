@@ -30,11 +30,7 @@ public class CrudOperations<T> {
 
 
     public ResultSet find(int id) {
-        try {
-            return this.findOrThrow(id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return this.findOrThrow(id);
     }
 
     public ResultSet findAll() {
@@ -68,7 +64,10 @@ public class CrudOperations<T> {
             int generatedId = resultSet.getInt(1);
 
 
-            resultSet.close(); fields = null;values = null;query = null;
+            resultSet.close();
+            fields = null;
+            values = null;
+            query = null;
 
             return this.findOrThrow(generatedId);
         } catch (SQLException e) {
@@ -84,7 +83,9 @@ public class CrudOperations<T> {
             String[] values = DaoHelper.getClassValues(model);
             String query = Factory.getSqlQueries().update(tableName, fields, values, id);
             this.statement.execute(query);
-            fields = null;values = null;query = null;
+            fields = null;
+            values = null;
+            query = null;
             return this.findOrThrow(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -92,9 +93,13 @@ public class CrudOperations<T> {
     }
 
 
-    private ResultSet findOrThrow(int id) throws SQLException {
-        resultSet = this.statement.executeQuery(Factory.getSqlQueries().selectById(tableName, id));
-        if(!resultSet.next())   throw new RuntimeException("No such id: " +id + " in table: " + tableName);
-        return resultSet;
+    private ResultSet findOrThrow(int id) {
+        try {
+            resultSet = this.statement.executeQuery(Factory.getSqlQueries().selectById(tableName, id));
+            if (!resultSet.next()) throw new RuntimeException("No such id: " + id + " in table: " + tableName);
+            return resultSet;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
