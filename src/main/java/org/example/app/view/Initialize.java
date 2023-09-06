@@ -3,7 +3,7 @@ package org.example.app.view;
 import org.example.app.shared.Helper.Printer;
 import org.example.app.shared.Helper.ViewHelper;
 import org.example.app.controller.LibraryController;
-import org.example.app.mrs.model.Library;
+import org.example.app.mrs.model.entity.Library;
 
 public class Initialize {
 
@@ -11,7 +11,7 @@ public class Initialize {
     private static String choice;
     private static final Library library = new Library();
 
-    public static void go() {
+    public static void start() {
         if (!LibraryController.isInitialized()) initializeApp();
     }
 

@@ -4,7 +4,7 @@ import org.example.dao.Helper.Factory;
 import org.example.dao.Helper.PrintHelper;
 import org.example.dao.Helper.DaoHelper;
 import org.example.dao.utils.config.AppConfig;
-import org.example.dao.utils.enums.AppMood;
+import org.example.dao.utils.enums.RunMood;
 
 import java.sql.SQLException;
 
@@ -13,7 +13,7 @@ public  class BaseRepository<T> extends RelationalRepository<T> {
     public BaseRepository(Class<T> modelClass) {
         super(modelClass);
         try {
-            if(AppConfig.APP_MOOD.equals(AppMood.Development.name())){
+            if(AppConfig.APP_MOOD.equals(RunMood.Development.name())){
                 this.createTable();
                 this.addColumns();
             }
@@ -24,7 +24,10 @@ public  class BaseRepository<T> extends RelationalRepository<T> {
 
 
     public void createTable() throws SQLException {
-        PrintHelper.printInfoMessage("Creating table " + tableName + "...................................");
+
+        System.out.println();
+        PrintHelper.printWarningMessage("Creating table " + tableName + "...................................");
+        System.out.println();
 
         this.statement.execute(Factory.getSqlQueries().createEmptyTable(tableName));
 

@@ -1,6 +1,6 @@
 package org.example.app.controller;
 
-import org.example.app.mrs.model.Library;
+import org.example.app.mrs.model.entity.Library;
 import org.example.app.mrs.service.impl.LibraryService;
 
 public class LibraryController {

@@ -7,19 +7,36 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class LogicHelper {
-    private static final  SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-    public static String dateToString(Date date){
-        return formatter.format(date);
+    private  static  Date tempDate;
+    private static final SimpleDateFormat inputFormatter = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
+    private static final SimpleDateFormat outputFormatter = new SimpleDateFormat("yyyy-MM-dd");
+
+
+    public static String dateToString(Date date) {
+        return outputFormatter.format(date);
     }
 
     public static Date stringToDate(String date) {
         try {
-            return formatter.parse(date);
+            return inputFormatter.parse(date);
         } catch (ParseException e) {
-            PrintHelper.printInfoMessage("use dd/MM/yyyy format");
+            PrintHelper.printInfoMessage("Use this format: yyyy-MM-dd");
             throw new RuntimeException(e);
         }
     }
 
+
+    public static Date generateReturnDate(int tempBorrowingDays) {
+        tempDate = null;
+        tempDate = new Date();
+        tempDate.setTime(tempDate.getTime() + ((long) tempBorrowingDays * 24 * 60 * 60 * 1000));
+
+        return (tempDate);
+    }
+
+
+
 }
+
+

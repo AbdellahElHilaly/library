@@ -1,5 +1,7 @@
 package org.example.app.shared.Helper;
 
+import org.example.app.view.Menu;
+
 import java.util.Scanner;
 
 public class ViewHelper {
@@ -24,11 +26,15 @@ public class ViewHelper {
             } else if (choice.equals("clear")) {
                 clearScreen();
                 System.out.println("Screen has been cleared.");
+            } else if (choice.equals("help")) {
+                Menu.showMenu();
             } else {
                 return choice;
             }
         }
     }
+
+
 
 
 }

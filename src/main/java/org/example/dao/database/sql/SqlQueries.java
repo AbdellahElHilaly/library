@@ -57,6 +57,10 @@ public abstract class SqlQueries {
         return "DELETE FROM " + tableName + " WHERE id = " + id;
     }
 
+    public String findBy(String tableName, String columnName, String value) {
+        return "SELECT * FROM " + tableName + " WHERE " + columnName + " = '" + value + "'";
+    }
+
     public String insertInto(String tableName, String[][] fields, String[] values) {
         String columns = Arrays.stream(fields)
                 .skip(1) // Skip the first element (the id field)
@@ -65,7 +69,7 @@ public abstract class SqlQueries {
 
         String valueList = Arrays.stream(values)
                 .skip(1) // Skip the first element (the id value)
-                .map(value -> "'" + SqlHelper.handelBoolenData(value) + "'")
+                .map(value -> "'" + value + "'")
                 .collect(Collectors.joining(", "));
 
         return String.format("INSERT INTO %s (%s) VALUES (%s)", tableName, columns, valueList);
@@ -89,6 +93,9 @@ public abstract class SqlQueries {
                 " ADD CONSTRAINT FK_" + firstTableName + "_" + secondTableName +
                 " FOREIGN KEY (" + secondTableName + "_id) REFERENCES " + secondTableName + "(id)";
     }
+
+
+
 
 
 

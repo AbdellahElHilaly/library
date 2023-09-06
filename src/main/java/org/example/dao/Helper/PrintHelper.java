@@ -5,12 +5,15 @@ import java.util.List;
 
 public class PrintHelper {
 
-    public static void printSuccessMessage(String message) {
-        System.out.println("\u001B[32m::" + message + ": ::\u001B[0m");
+    public static void printSuccessMessage(String success) {
+        System.out.println("\u001B[32m::" + success + ": ::\u001B[0m");
     }
 
-    public static void printErrorMessage(String unknownDataType) {
-        System.out.println("\u001B[31m::" + unknownDataType + ": ::\u001B[0m");
+    public static void printErrorMessage(String error) {
+        System.out.println("\u001B[31m::" + error + ": ::\u001B[0m");
+    }
+    public static void printWarningMessage(String warning) {
+        System.out.println("\u001B[33m::" + warning + ": ::\u001B[0m");
     }
 
     public static void printInfoMessage(String info) {
@@ -39,4 +42,6 @@ public class PrintHelper {
 
 
     }
+
+
 }

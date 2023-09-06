@@ -57,7 +57,7 @@ public class DrawLogo extends Printer {
 
 
 
-    public static void go() {
+    public static void start() {
         tempColor = "yellow";
         line();lineEnd();
         tempColor = "cyan";

@@ -1,5 +1,9 @@
 package org.example.app.shared.Helper;
 
+import org.example.dao.Helper.PrintHelper;
+
+import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
 
 public class Printer {
@@ -78,6 +82,14 @@ public class Printer {
         endl();
     }
 
+    public  static <T> void printKeyVal(T key, String val){
+        tempColor = "yellow";
+        print(key + ": ");
+        tempColor = "cyan";
+        print(val);
+        endl();
+    }
+
 
     protected static void line() {
         System.out.print(colorsCode.get(tempColor) + line + colorsCode.get("reset"));
@@ -94,5 +106,30 @@ public class Printer {
 
     protected static void endl() {
         System.out.println();
+    }
+
+
+
+    public static <T> void printClass(T object) {
+        System.out.println("\u001B[38;5;208m::::::::::::::::::::::::::::" + object.getClass().getSimpleName() + "::::::::::::::::::::::::::::\u001B[0m");
+        for (Field field : object.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            try {
+                System.out.println("\u001B[38;5;214m::" + field.getName() + "---------------\u001B[0m" + field.get(object));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public static <T> void printClassList(List<T> objectList) {
+        System.out.println("------------------------------------------------------------------------------------------");
+        info("Printing list of " + objectList.get(0).getClass().getSimpleName() + "s");
+        objectList.forEach(PrintHelper::printClass);
+        info("End of list");
+        System.out.println("------------------------------------------------------------------------------------------");
+
+
     }
 }

@@ -1,4 +1,4 @@
-package org.example.app.mrs.model;
+package org.example.app.mrs.model.entity;
 
 import org.example.dao.ORM.ModelMapper;
 

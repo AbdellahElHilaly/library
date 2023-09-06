@@ -7,6 +7,7 @@ import org.example.dao.database.connection.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Map;
 
 public class CrudOperations<T> {
 
@@ -40,6 +41,16 @@ public class CrudOperations<T> {
         }
     }
 
+    public  ResultSet findBy(String columnName, String value){
+        try {
+            resultSet = this.statement.executeQuery(Factory.getSqlQueries().findBy(tableName,columnName,value));
+            if (!resultSet.next()) return null;
+            return resultSet;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public void delete(int id) {
         try {
@@ -50,10 +61,16 @@ public class CrudOperations<T> {
         }
     }
 
+
+
     public ResultSet save(T model) {
+
         try {
             String[][] fields = DaoHelper.getClassFields(modelClass);
             String[] values = DaoHelper.getClassValues(model);
+
+            DaoHelper.convertToSqlValues(fields, values);
+
             String query = Factory.getSqlQueries().insertInto(tableName, fields, values);
             this.statement.execute(query, Statement.RETURN_GENERATED_KEYS);
 

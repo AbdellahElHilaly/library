@@ -1,10 +1,9 @@
 package org.example.app.view;
 
-import org.example.app.mrs.model.Library;
+import org.example.app.mrs.model.entity.Library;
 import org.example.app.mrs.service.impl.LibraryService;
 import org.example.app.shared.Helper.Printer;
 import org.example.app.shared.Helper.ViewHelper;
-import org.example.dao.Helper.PrintHelper;
 
 public class Authentication {
     static LibraryService libraryService = new LibraryService();
@@ -13,21 +12,18 @@ public class Authentication {
     private static String password;
 
 
-
-    public static  void go() {
-        Printer.info("welcome to " + library.getName() + "please enter your username and password");
-
+    public static void start() {
+        Printer.info("welcome to " + library.getName() + " please enter your username and password");
 
 
-        while (true){
+        while (true) {
 
             if (login()) {
                 Printer.info("welcome " + library.getOuner());
+                return;
             } else {
                 Printer.error("wrong username or password");
-                return;
             }
-
         }
 
     }

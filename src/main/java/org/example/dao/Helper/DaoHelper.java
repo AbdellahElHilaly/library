@@ -1,5 +1,6 @@
 package org.example.dao.Helper;
 
+import org.example.app.shared.Helper.LogicHelper;
 import org.example.dao.Type.Paragraph;
 import org.example.dao.Type.Text;
 
@@ -8,6 +9,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static org.example.dao.Helper.SqlHelper.handelBoolenData;
 
 public class DaoHelper {
     private static String className;
@@ -152,6 +155,18 @@ public class DaoHelper {
 
     public static String getTableNameFromRelationalField(String fieldName) {
         return fieldName.substring(0, fieldName.length() - 3);
+    }
+
+    public static void convertToSqlValues(String[][] fields, String[] values) {
+
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i][0].equals("Date")) {
+                values[i] = SqlHelper.handelDateData(values[i]);
+            }
+            if (fields[i][0].equals("boolean")) {
+                values[i] = handelBoolenData(values[i]);
+            }
+        }
     }
 }
 

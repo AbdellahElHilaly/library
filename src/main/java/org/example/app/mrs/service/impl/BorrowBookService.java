@@ -1,13 +1,13 @@
 package org.example.app.mrs.service.impl;
 
-import org.example.app.mrs.model.BorrowBook;
+import org.example.app.mrs.model.entity.BorrowBook;
 import org.example.app.mrs.repository.BorrowBookRepository;
 import org.example.app.mrs.service.CrudService;
 
 import java.util.List;
 
 public class BorrowBookService implements CrudService<BorrowBook> {
-    private final BorrowBook borrower = new BorrowBook();
+    private final BorrowBook borrowBook = new BorrowBook();
     private final BorrowBookRepository borrowerRepository = new BorrowBookRepository();
 
 
@@ -34,5 +34,9 @@ public class BorrowBookService implements CrudService<BorrowBook> {
     @Override
     public void delete(int id) {
 
+    }
+
+    public BorrowBook addBorrowBook(BorrowBook tempBorrowBook) {
+        return borrowBook.mapData(borrowerRepository.save(tempBorrowBook));
     }
 }
