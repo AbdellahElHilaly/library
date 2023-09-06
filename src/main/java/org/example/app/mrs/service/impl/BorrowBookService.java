@@ -1,5 +1,7 @@
 package org.example.app.mrs.service.impl;
 
+import org.example.app.mrs.model.dto.BorrowerBooksDto;
+import org.example.app.mrs.model.entity.Book;
 import org.example.app.mrs.model.entity.BorrowBook;
 import org.example.app.mrs.repository.BorrowBookRepository;
 import org.example.app.mrs.service.CrudService;
@@ -8,6 +10,8 @@ import java.util.List;
 
 public class BorrowBookService implements CrudService<BorrowBook> {
     private final BorrowBook borrowBook = new BorrowBook();
+    private final BorrowerBooksDto borrowerBooksDto = new BorrowerBooksDto();
+
     private final BorrowBookRepository borrowerRepository = new BorrowBookRepository();
 
 
@@ -39,4 +43,10 @@ public class BorrowBookService implements CrudService<BorrowBook> {
     public BorrowBook addBorrowBook(BorrowBook tempBorrowBook) {
         return borrowBook.mapData(borrowerRepository.save(tempBorrowBook));
     }
+
+    public BorrowerBooksDto selectBooksBorrowed(String cni) {
+        return borrowerBooksDto.mapMultipleData(borrowerRepository.selectBooksBorrowed(cni));
+    }
+
+
 }

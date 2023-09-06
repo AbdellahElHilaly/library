@@ -1,5 +1,8 @@
 package org.example.app.shared.Helper;
 
+import org.example.app.mrs.model.dto.BorrowerBooksDto;
+import org.example.app.mrs.model.entity.Book;
+import org.example.app.mrs.model.entity.Borrower;
 import org.example.dao.Helper.PrintHelper;
 
 import java.lang.reflect.Field;
@@ -82,9 +85,9 @@ public class Printer {
         endl();
     }
 
-    public  static <T> void printKeyVal(T key, String val){
+    public static <T> void printKeyVal(T key, String val) {
         tempColor = "yellow";
-        print(key + ": ");
+        print(key + " : ");
         tempColor = "cyan";
         print(val);
         endl();
@@ -110,26 +113,46 @@ public class Printer {
 
 
 
+
     public static <T> void printClass(T object) {
-        System.out.println("\u001B[38;5;208m::::::::::::::::::::::::::::" + object.getClass().getSimpleName() + "::::::::::::::::::::::::::::\u001B[0m");
-        for (Field field : object.getClass().getDeclaredFields()) {
+        Class<?> clazz = object.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+
+        System.out.println(clazz.getSimpleName() + " : {");
+
+        for (Field field : fields) {
             field.setAccessible(true);
+
+            String fieldName = field.getName();
+            String fieldValue;
+
             try {
-                System.out.println("\u001B[38;5;214m::" + field.getName() + "---------------\u001B[0m" + field.get(object));
+                Object value = field.get(object);
+                fieldValue = value != null ? value.toString() : "null";
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                fieldValue = "N/A";
             }
+
+            printField(fieldName, fieldValue);
         }
+
+        System.out.println("}");
+    }
+
+    private static void printField(String key, String value) {
+        System.out.print("  ");
+        printKeyVal(key, value);
     }
 
 
-    public static <T> void printClassList(List<T> objectList) {
-        System.out.println("------------------------------------------------------------------------------------------");
-        info("Printing list of " + objectList.get(0).getClass().getSimpleName() + "s");
-        objectList.forEach(PrintHelper::printClass);
-        info("End of list");
-        System.out.println("------------------------------------------------------------------------------------------");
+    public static <T> void printClassList(List<T> objects) {
+        System.out.println("-------------------------------start list-------------------------------------");
+        for (T object : objects) {
+            printClass(object);
+        }
+        System.out.println("-------------------------------end list---------------------------------------");
 
 
     }
 }
+

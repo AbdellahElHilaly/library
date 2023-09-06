@@ -43,4 +43,13 @@ public class BookController {
     public List<Book> findAllBooks() {
         return bookService.selectAll();
     }
+
+    public Book findAvailableBookByIsbn(String isbn) {
+        tempBook = bookService.findAvailableBookByIsbn(isbn);
+        if (tempBook != null) {
+            return tempBook;
+        }
+        Printer.warning("no available book found");
+        return null;
+    }
 }

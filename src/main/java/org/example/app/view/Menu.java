@@ -9,6 +9,40 @@ public class Menu {
 
     private static String choice;
 
+    public static void start() {
+        Printer.info("welcome to the menu app please enter your choice, (help) for help");
+        while (true){
+            handleChoice();
+        }
+    }
+
+    public static void handleChoice() {
+        choice = ViewHelper.getChoice();
+
+        switch (choice) {
+            case "a br":
+                BorrowerView.addBorrower();
+                break;
+            case "a bk":
+                BookView.addBook();
+                break;
+            case "b bk":
+                BookView.borrowBook();
+                break;
+            case "l a br":
+                BorrowerView.listAllBorrowers();
+                break;
+            case "l a bk":
+                BookView.listAllBooks();
+                break;
+            default:
+                Printer.warning("invalid choice");
+                break;
+        }
+
+
+    }
+
 
     public static void showMenu() {
 
@@ -33,37 +67,10 @@ public class Menu {
 
     }
 
-    public static void start() {
-        Printer.info("welcome to the menu app please enter your choice, (help) for help");
-        while (true){
-            handleChoice();
-        }
-    }
 
 
-    public static void handleChoice() {
-        choice = ViewHelper.getChoice();
-
-        switch (choice) {
-            case "a br":
-                BorrowerView.addBorrower();
-                break;
-            case "a bk":
-                BookView.addBook();
-                break;
-            case "b bk":
-                BookView.borrowBook();
-                break;
-            case "l a br":
-                BorrowerView.listAllBorrowers();
-                break;
-            case "l a bk":
-                BookView.listAllBooks();
-                break;
-        }
 
 
-    }
 
 
 }

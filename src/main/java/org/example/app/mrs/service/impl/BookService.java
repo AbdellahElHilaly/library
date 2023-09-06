@@ -39,10 +39,15 @@ public class BookService implements CrudService<Book> {
 
 
     public Book findByISBN(String isbn) {
-        tempBook = tempBook.mapData(bookRepository.findBy("isbn", isbn));
-        if (tempBook != null) {
-            return tempBook;
-        }
-        return null;
+        if (tempBook == null) tempBook = new Book();
+        else tempBook.initializeObject();
+        return  tempBook.mapData(bookRepository.findBy("isbn", isbn));
+    }
+
+
+    public Book findAvailableBookByIsbn(String isbn) {
+        if (tempBook == null) tempBook = new Book();
+        else tempBook.initializeObject();
+        return  tempBook.mapData(bookRepository.findAvailableBookByIsbn(isbn));
     }
 }

@@ -22,6 +22,21 @@ public class Book extends ModelMapper<Book>{
     public Book() {
     }
 
+    public Book(int id, String author, String title, String isbn) {
+        this.id = id;
+        this.author = author;
+        this.title = title;
+        this.ISBN = isbn;
+    }
+
+    public Book(int borrowerId, String author, String title, String isbn, String status) {
+        this.id = borrowerId;
+        this.author = author;
+        this.title = title;
+        this.ISBN = isbn;
+        this.status = status;
+    }
+
     @Override
     public Book createInstance() {
         return new Book();
@@ -48,6 +63,16 @@ public class Book extends ModelMapper<Book>{
     }
 
     public int getId() {
-        return id;
+        return this.id;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setId(int bookId) {
+        this.id = bookId;
     }
 }
+
+

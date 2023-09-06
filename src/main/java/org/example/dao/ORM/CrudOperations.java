@@ -15,7 +15,7 @@ public class CrudOperations<T> {
     protected final String tableName;
     protected java.sql.Connection connection;
     protected Statement statement;
-    ResultSet resultSet;
+    protected ResultSet resultSet;
 
     public CrudOperations(Class<T> modelClass) {
         this.modelClass = modelClass;
@@ -75,8 +75,8 @@ public class CrudOperations<T> {
             this.statement.execute(query, Statement.RETURN_GENERATED_KEYS);
 
             resultSet = statement.getGeneratedKeys();
-            resultSet.next();
 
+            resultSet.next();
             int generatedId = resultSet.getInt(1);
 
 

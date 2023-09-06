@@ -12,35 +12,71 @@ public abstract class ModelMapper<T> {
     private T instance;
     private final List<T> dataList = new ArrayList<>();
 
-    public T mapData(ResultSet resultSet) {
+//    public T mapData(ResultSet resultSet) {
+//
+//        if(resultSet == null) return null;
+//        try {
+//            instance = createInstance();
+//
+//            ResultSetMetaData rsmd = null;
+//
+//            rsmd = resultSet.getMetaData();
+//            int columnsNumber = rsmd.getColumnCount();
+//
+//            for (int i = 1; i <= columnsNumber; i++) {
+//                String columnName = rsmd.getColumnName(i);
+//                Object columnValue = resultSet.getObject(i);
+//
+//                DaoHelper.setFieldByName(instance, columnName, columnValue); //pass instance by reference
+//                columnName = null;
+//                columnValue = null; //free memory
+//            }
+//            rsmd = null;
+//
+//            return instance;
+//
+//
+//        } catch (SQLException | IllegalAccessException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
 
-        if(resultSet == null) return null;
+
+    public T mapData(ResultSet resultSet) {
+        if (resultSet == null) return null;
         try {
             instance = createInstance();
 
-            ResultSetMetaData rsmd = null;
+            ResultSetMetaData rsmd = resultSet.getMetaData();
 
-            rsmd = resultSet.getMetaData();
-            int columnsNumber = rsmd.getColumnCount();
+            // Get the fields of the instance's class
+            Field[] fields = instance.getClass().getDeclaredFields();
+            for (Field field : fields) {
+                String fieldName = field.getName();
 
-            for (int i = 1; i <= columnsNumber; i++) {
-                String columnName = rsmd.getColumnName(i);
-                Object columnValue = resultSet.getObject(i);
+                // Find the corresponding column index based on the field name
+                int columnIndex = DaoHelper.findColumnIndex(rsmd, fieldName);
 
-                DaoHelper.setFieldByName(instance, columnName, columnValue); //pass instance by reference
-                columnName = null;
-                columnValue = null; //free memory
+                if (columnIndex != -1) {
+                    Object columnValue = resultSet.getObject(columnIndex);
+
+                    // Set the field's value in the instance
+                    DaoHelper.setFieldByName(instance, fieldName, columnValue);
+                }
             }
+
             rsmd = null;
-
             return instance;
-
-
         } catch (SQLException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-
     }
+
+
+
+
+
 
     public List<T> mapDataList(ResultSet resultSet) {
         while (true) {
@@ -92,6 +128,9 @@ public abstract class ModelMapper<T> {
             }
         }
     }
+
+
+
 
 
 }

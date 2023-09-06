@@ -6,6 +6,8 @@ import org.example.dao.Type.Text;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -88,13 +90,15 @@ public class DaoHelper {
 
     public static <T> void setFieldByName(T instance, String fieldName, Object value) throws IllegalAccessException {
         try {
+
             Field field = instance.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
             value = handleNullableValue(instance, field, value);
 
             if (isSpecialFieldType(field.getType())) {
                 handleSpecialField(instance, field, value);
-            } else {
+            }
+            else {
                 field.set(instance, value);
             }
         } catch (NoSuchFieldException e) {
@@ -167,6 +171,17 @@ public class DaoHelper {
                 values[i] = handelBoolenData(values[i]);
             }
         }
+    }
+
+    public static int findColumnIndex(ResultSetMetaData rsmd, String fieldName) throws SQLException {
+        int columnsNumber = rsmd.getColumnCount();
+        for (int i = 1; i <= columnsNumber; i++) {
+            String columnName = rsmd.getColumnName(i);
+            if (columnName.equalsIgnoreCase(fieldName)) {
+                return i; // Found a matching column name
+            }
+        }
+        return -1; // No matching column name found
     }
 }
 

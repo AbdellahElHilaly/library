@@ -21,6 +21,14 @@ public class Borrower extends ModelMapper<Borrower> {
     public Borrower() {
     }
 
+    public Borrower(int id, String name, String phone, String mail, String cni) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.mail = mail;
+        this.cni = cni;
+    }
+
     @Override
     public Borrower createInstance() {
         return new Borrower();
@@ -60,6 +68,10 @@ public class Borrower extends ModelMapper<Borrower> {
 
     public String getCni() {
         return cni;
+    }
+
+    public void setId(int borrowerId) {
+        this.id = borrowerId;
     }
 }
 

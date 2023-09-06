@@ -3,6 +3,7 @@ package org.example.app.view;
 import org.example.app.controller.BookController;
 import org.example.app.controller.BorrowBookController;
 import org.example.app.controller.BorrowerController;
+import org.example.app.mrs.model.dto.BorrowerBooksDto;
 import org.example.app.mrs.model.entity.Book;
 import org.example.app.mrs.model.entity.BorrowBook;
 import org.example.app.mrs.model.entity.Borrower;
@@ -22,7 +23,9 @@ public class BookView {
     private static final BorrowBookController borrowBookController = new BorrowBookController();
 
     private static String tempQuantity;
+    private static String choice;
     private static  int tempBorrowingDays;
+
 
 
     public static void addBook() {
@@ -60,24 +63,34 @@ public class BookView {
 
 
         Printer.set("Enter borrower cni");
-        tempBorrower = borrowerController.findBorrowerByCni(ViewHelper.getChoice());
+        choice = ViewHelper.getChoice();
+        BorrowerBooksDto borrowerBooksDto = borrowBookController.findBorrowedBooksByBorrowerCni(choice);
 
-        if (tempBorrower == null) return;
+        if (borrowerBooksDto == null) return;
+        tempBorrower = borrowerController.findBorrowerByCni(choice);
+
+        borrowerBooksDto.getBorrower().setId(tempBorrower.getId());
+        borrowerBooksDto.show();
+
+
+
+
 
         Printer.set("Enter book isbn");
-        tempBook = bookController.findBookByIsbn(ViewHelper.getChoice());
+        tempBook = bookController.findAvailableBookByIsbn(ViewHelper.getChoice());
+
+
 
         if (tempBook == null) return;
 
         Printer.set("How many days would you like to borrow this book? Max 30 days");
         tempBorrowingDays = Integer.parseInt(ViewHelper.getChoice());
 
-
         tempBorrowBook = borrowBookController.addBorrowBook(tempBook , tempBorrower, tempBorrowingDays);
 
-        Printer.printClass(tempBook);
-        Printer.printClass(tempBorrower);
-        Printer.printClass(tempBorrowBook);
+        if (tempBorrowBook == null) return;
+        borrowerBooksDto = borrowBookController.findBorrowedBooksByBorrowerCni(tempBorrower.getCni());
+        borrowerBooksDto.show();
 
     }
 
