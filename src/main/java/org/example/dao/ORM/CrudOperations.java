@@ -1,5 +1,6 @@
 package org.example.dao.ORM;
 
+import org.example.app.shared.Helper.Printer;
 import org.example.dao.Helper.DaoHelper;
 import org.example.dao.Helper.Factory;
 import org.example.dao.database.connection.Connection;
@@ -112,7 +113,7 @@ public class CrudOperations<T> {
     private ResultSet findOrThrow(int id) {
         try {
             resultSet = this.statement.executeQuery(Factory.getSqlQueries().selectById(tableName, id));
-            if (!resultSet.next()) throw new RuntimeException("No such id: " + id + " in table: " + tableName);
+            if (!resultSet.next()) Printer.error("no " + tableName + " with id " + id + " found");
             return resultSet;
         } catch (SQLException e) {
             throw new RuntimeException(e);

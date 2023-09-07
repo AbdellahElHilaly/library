@@ -52,4 +52,14 @@ public class BookController {
         Printer.warning("no available book found");
         return null;
     }
+
+    public Book findBookById(int bookId) {
+        tempBook = bookService.select(bookId);
+        if (tempBook != null) {
+            Printer.printClass(tempBook);
+            return tempBook;
+        }
+
+        return null;
+    }
 }

@@ -6,10 +6,12 @@ import org.example.app.mrs.model.entity.BorrowBook;
 import org.example.app.mrs.repository.BorrowBookRepository;
 import org.example.app.mrs.service.CrudService;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 public class BorrowBookService implements CrudService<BorrowBook> {
     private final BorrowBook borrowBook = new BorrowBook();
+    private ResultSet resultSet = null;
     private final BorrowerBooksDto borrowerBooksDto = new BorrowerBooksDto();
 
     private final BorrowBookRepository borrowerRepository = new BorrowBookRepository();
@@ -37,7 +39,7 @@ public class BorrowBookService implements CrudService<BorrowBook> {
 
     @Override
     public void delete(int id) {
-
+        borrowerRepository.delete(id);
     }
 
     public BorrowBook addBorrowBook(BorrowBook tempBorrowBook) {
@@ -45,7 +47,9 @@ public class BorrowBookService implements CrudService<BorrowBook> {
     }
 
     public BorrowerBooksDto selectBooksBorrowed(String cni) {
-        return borrowerBooksDto.mapMultipleData(borrowerRepository.selectBooksBorrowed(cni));
+         resultSet = borrowerRepository.selectBooksBorrowed(cni);
+        if(resultSet == null) return null;
+        return borrowerBooksDto.mapMultipleData(resultSet);
     }
 
 

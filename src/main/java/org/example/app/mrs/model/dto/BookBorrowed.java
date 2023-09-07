@@ -20,4 +20,7 @@ public class BookBorrowed extends  ModelMapper<BookBorrowed>{
         }
 
 
+    public int getId() {
+        return Book_id;
+    }
 }

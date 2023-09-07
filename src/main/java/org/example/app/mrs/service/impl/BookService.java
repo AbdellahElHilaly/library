@@ -1,16 +1,22 @@
 package org.example.app.mrs.service.impl;
 
+import org.example.app.mrs.model.dto.StatisticsDto;
 import org.example.app.mrs.model.entity.Book;
 import org.example.app.mrs.repository.LibraryRepository;
 import org.example.app.mrs.service.CrudService;
 import org.example.app.mrs.repository.BookRepository;
+import org.example.app.shared.Helper.Printer;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 public class BookService implements CrudService<Book> {
     private Book tempBook = new Book();
     BookRepository bookRepository = new BookRepository();
     LibraryRepository libraryRepository = new LibraryRepository();
+    StatisticsDto statisticsDto = new StatisticsDto();
+
+    ResultSet resultSet = null;
 
     @Override
     public Book save(Book book) {
@@ -19,7 +25,11 @@ public class BookService implements CrudService<Book> {
 
     @Override
     public Book select(int id) {
-        return tempBook.mapData(bookRepository.find(id));
+        resultSet = bookRepository.find(id);
+        if (resultSet == null){
+            return null;
+        }
+        return tempBook.mapData(resultSet);
     }
 
     @Override
@@ -50,4 +60,6 @@ public class BookService implements CrudService<Book> {
         else tempBook.initializeObject();
         return  tempBook.mapData(bookRepository.findAvailableBookByIsbn(isbn));
     }
+
+
 }

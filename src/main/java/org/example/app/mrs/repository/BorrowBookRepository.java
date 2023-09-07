@@ -24,4 +24,7 @@ public class BorrowBookRepository extends BaseRepository<BorrowBook> {
             throw new RuntimeException(e);
         }
     }
+
+
+
 }
