@@ -50,6 +50,9 @@ public class Menu {
             case "ch a st":
                 StatisticView.showAllStatics();
                 break;
+            case "bk a st":
+                StatisticView.buckupAllStatistics();
+                break;
             case "rt bk":
                 BookView.returnBook();
                 break;
@@ -94,6 +97,9 @@ public class Menu {
         Printer.printKeyVal("ch lb st", "Show statistics about library");
         Printer.printKeyVal("ch bk st", "Show book statistics");
         Printer.printKeyVal("ch a st", "Show total books  statistics");
+
+        Printer.printKeyVal("bk a st", "Backup all statistics");
+
 
     }
 

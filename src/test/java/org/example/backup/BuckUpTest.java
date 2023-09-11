@@ -16,7 +16,7 @@ public class BuckUpTest extends TestCase {
 
     public void testCreateFile() {
 
-        String directory = "C:\\Users\\Youcode\\Desktop\\buckuptest";
+        String directory = "C:\\Users\\Youcode\\Desktop\\buckuptest\\";
         StatisticService statisticService = new StatisticService();
 
 

@@ -16,22 +16,26 @@ import java.util.List;
 public class StatisticsBackup {
 
     public static String getDirectoryFromUser() {
+        Printer.info("Select directory");
+
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int returnValue = fileChooser.showOpenDialog(null);
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
+            Printer.success("Directory selected");
             return fileChooser.getSelectedFile().getAbsolutePath();
         }
 
-        return null; // Return null if the user cancels
+        Printer.error("Directory not selected successfully");
+        return null;
     }
 
     public static void createCsvFile(String directory, List<StatisticsDto> data) throws IOException {
-        String fileName = "statistics" + LogicHelper.formatDateTime(new Date()) + ".csv";
-        Printer.debug(fileName);
-        String filePath = directory + "\\" + "statistics_2023-09-11_14_21_41.csv";
-
+        Printer.info("Creating file");
+        directory += "\\";
+        String fileName = "statistics " + LogicHelper.formatDateTime(new Date()) + ".csv";
+        String filePath = directory + fileName;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 
             writer.write("ISBN,Total,Borrowed,Available,Lost");
@@ -43,6 +47,7 @@ public class StatisticsBackup {
             }
 
         }
+        Printer.success("File created successfully");
 
 
     }

@@ -33,7 +33,9 @@ public class Factory {
 
 
     public static SqlQueries getSqlQueries() {
+
         if(sqlQueries != null) return sqlQueries; // use the old object if the program is already run
+
         if(DatabaseConfig.DATABASE_TYPE.equals("postgresql")) {
             sqlQueries = new PostgresqlQueries();
         } else if(DatabaseConfig.DATABASE_TYPE.equals("mysql")) {

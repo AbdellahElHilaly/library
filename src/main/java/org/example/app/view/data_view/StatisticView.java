@@ -25,4 +25,8 @@ public class StatisticView {
     public static void showAllStatics() {
         Printer.printClassList(statisticController.getAllStatistics());
     }
+
+    public static void buckupAllStatistics() {
+        statisticController.buckupAllStatistics();
+    }
 }

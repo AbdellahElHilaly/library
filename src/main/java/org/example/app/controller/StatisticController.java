@@ -1,11 +1,13 @@
 package org.example.app.controller;
 
+import org.example.app.backup.StatisticsBackup;
 import org.example.app.mrs.model.dto.StatisticsDto;
 import org.example.app.mrs.model.entity.Book;
 import org.example.app.mrs.service.impl.BookService;
 import org.example.app.mrs.service.impl.StatisticService;
 import org.example.app.shared.Helper.Printer;
 
+import java.io.IOException;
 import java.util.List;
 
 public class StatisticController {
@@ -34,5 +36,17 @@ public class StatisticController {
 
     public List<StatisticsDto> getAllStatistics() {
         return statisticService.getAllIsbnStatistics();
+    }
+
+    public void buckupAllStatistics() {
+        List<StatisticsDto> statisticsDtoList = statisticService.getAllIsbnStatistics();
+
+        String directory = StatisticsBackup.getDirectoryFromUser();
+
+        try {
+            StatisticsBackup.createCsvFile(directory, statisticsDtoList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

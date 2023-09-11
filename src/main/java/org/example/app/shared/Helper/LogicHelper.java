@@ -11,7 +11,7 @@ public class LogicHelper {
     private static Date tempDate;
     private static final SimpleDateFormat inputFormatter = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
     private static final SimpleDateFormat outputFormatter = new SimpleDateFormat("yyyy-MM-dd");
-    private static final SimpleDateFormat dateTileFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final SimpleDateFormat dateTileFormat = new SimpleDateFormat("yyyy-MM-dd (HH-mm-ss)");
 
 
     public static String dateToString(Date date) {
