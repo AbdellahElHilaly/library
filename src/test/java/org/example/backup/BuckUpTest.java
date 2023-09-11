@@ -2,10 +2,12 @@ package org.example.backup;
 
 import junit.framework.TestCase;
 import org.example.app.backup.StatisticsBackup;
+import org.example.app.mrs.model.dto.StatisticsDto;
 import org.example.app.mrs.service.impl.StatisticService;
 import org.example.app.shared.Helper.Printer;
 
 import java.io.IOException;
+import java.util.List;
 
 public class BuckUpTest extends TestCase {
 
@@ -32,6 +34,14 @@ public class BuckUpTest extends TestCase {
 
     }
 
+
+    public  void  testKarimFunction(){
+        StatisticService statisticService = new StatisticService();
+        List<StatisticsDto> backUp = statisticService.getAllIsbnStatistics();
+
+        StatisticsBackup.createExcelFile(backUp , "karim");
+
+    }
 
 
 

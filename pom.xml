@@ -73,6 +73,10 @@
 
 
 
+      <!--
+      cmd for download dependencies : mvn dependency:copy-dependencies
+      cmd for update dependencies : mvn dependency:purge-local-repository
+      -->
 
   </dependencies>
   <build>
