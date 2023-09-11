@@ -9,7 +9,7 @@ public class StatisticsDto  extends  ModelMapper<StatisticsDto>{
     private long QuantityTotal;
     private BigDecimal QuantityBorrowed;
     private BigDecimal QuantityAvailable;
-
+    private String ISBN;
     private  BigDecimal QuantityLost;
 
     @Override
@@ -18,6 +18,23 @@ public class StatisticsDto  extends  ModelMapper<StatisticsDto>{
     }
 
 
+    public long getQuantityTotal() {
+        return QuantityTotal;
+    }
 
+    public double getQuantityBorrowed() {
+        return QuantityBorrowed.doubleValue();
+    }
 
+    public double getQuantityAvailable() {
+        return QuantityAvailable.doubleValue();
+    }
+
+    public String getISBN() {
+        return ISBN;
+    }
+
+    public double getQuantityLost() {
+        return QuantityLost.doubleValue();
+    }
 }

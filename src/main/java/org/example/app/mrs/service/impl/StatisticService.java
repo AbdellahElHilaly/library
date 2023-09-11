@@ -4,6 +4,7 @@ import org.example.app.mrs.model.dto.StatisticsDto;
 import org.example.app.mrs.repository.BookRepository;
 
 import java.sql.ResultSet;
+import java.util.List;
 
 public class StatisticService {
 
@@ -16,5 +17,9 @@ public class StatisticService {
 
     public  StatisticsDto getBookStatisticsDto(String isbn){
         return statisticsDto.mapData(bookRepository.getBooksStatisticsByIsbn(isbn));
+    }
+
+    public List<StatisticsDto> getAllIsbnStatistics(){
+        return statisticsDto.mapDataList(bookRepository.getAllIsbnStatistics());
     }
 }

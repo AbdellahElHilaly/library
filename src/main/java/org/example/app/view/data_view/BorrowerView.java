@@ -1,4 +1,4 @@
-package org.example.app.view;
+package org.example.app.view.data_view;
 
 import org.example.app.controller.BorrowerController;
 import org.example.app.mrs.model.entity.Borrower;

@@ -1,4 +1,4 @@
-package org.example.app.view;
+package org.example.app.view.app_view;
 
 import org.example.app.mrs.model.entity.Library;
 import org.example.app.mrs.service.impl.LibraryService;

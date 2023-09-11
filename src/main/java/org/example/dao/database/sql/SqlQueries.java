@@ -95,8 +95,15 @@ public abstract class SqlQueries {
     }
 
 
+    public String updateWhere(String tableName, String[][] fields, String[] values, String where, String value) {
+        String updateFields = Arrays.stream(fields)
+                .filter(field -> !field[1].equals("id")) // Skip the id field
+                .map(field -> {
+                    String fieldValue = SqlHelper.handelBoolenData(values[Arrays.asList(fields).indexOf(field)]);
+                    return field[1] + " = '" + fieldValue + "'";
+                })
+                .collect(Collectors.joining(", "));
 
-
-
-
+        return String.format("UPDATE %s SET %s WHERE %s = '%s'", tableName, updateFields, where, value);
+    }
 }

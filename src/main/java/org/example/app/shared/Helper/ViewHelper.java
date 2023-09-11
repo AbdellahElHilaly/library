@@ -1,12 +1,12 @@
 package org.example.app.shared.Helper;
 
-import org.example.app.view.Menu;
+import org.example.app.view.app_view.Menu;
 
 import java.util.Scanner;
 
 public class ViewHelper {
     private static final Scanner scanner = new Scanner(System.in);
-    private static String choice;
+    public static String choice;
 
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
@@ -32,6 +32,16 @@ public class ViewHelper {
                 return choice;
             }
         }
+    }
+
+
+    public static boolean  handelChoice(){
+        choice = ViewHelper.getChoice();
+        if (choice.equals("stop")) {
+            Printer.success("Stopping Operation");
+            return false;
+        }
+        return true;
     }
 
 

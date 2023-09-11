@@ -1,4 +1,4 @@
-package org.example.app.view;
+package org.example.app.view.data_view;
 
 import org.example.app.controller.BookController;
 import org.example.app.controller.BorrowBookController;
@@ -14,6 +14,8 @@ import org.example.app.shared.util.enums.BookStatus;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static org.example.app.shared.Helper.ViewHelper.handelChoice;
+
 public class BookView {
 
     private static Book tempBook = new Book();
@@ -27,17 +29,15 @@ public class BookView {
     private static final BorrowBookController borrowBookController = new BorrowBookController();
 
     private static String tempQuantity;
-    private static String choice;
     private static int tempBorrowingDays;
 
-    private  static final StatisticController statisticController = new StatisticController();
 
 
     public static void addBook() {
         Printer.set("Enter book quantity");
 
         if (!handelChoice()) return;
-        tempQuantity = choice;
+        tempQuantity = ViewHelper.choice;
 
         Printer.printClassList(bookController.addBooks(setBook(), tempQuantity));
     }
@@ -71,11 +71,11 @@ public class BookView {
 
         if(!handelChoice()) return;
 
-        borrowerBooksDto = borrowBookController.findBorrowedBooksByBorrowerCni(choice);
+        borrowerBooksDto = borrowBookController.findBorrowedBooksByBorrowerCni(ViewHelper.choice);
 
         if (borrowerBooksDto == null) return;
 
-        tempBorrower = borrowerController.findBorrowerByCni(choice);
+        tempBorrower = borrowerController.findBorrowerByCni(ViewHelper.choice);
 
         borrowerBooksDto.getBorrower().setId(tempBorrower.getId());
 
@@ -85,7 +85,7 @@ public class BookView {
             Printer.set("Enter book isbn");
             if(!handelChoice()) return;
 
-            tempBook = bookController.findAvailableBookByIsbn(choice);
+            tempBook = bookController.findAvailableBookByIsbn(ViewHelper.choice);
             if (tempBook == null) Printer.warning("this book not exist, or not available try again");
             else break;
         }
@@ -93,7 +93,7 @@ public class BookView {
 
         Printer.set("How many days would you like to borrow this book? Max 30 days");
         if(!handelChoice()) return;
-        tempBorrowingDays = Integer.parseInt(choice);
+        tempBorrowingDays = Integer.parseInt(ViewHelper.choice);
 
         tempBorrowBook = borrowBookController.addBorrowBook(tempBook, tempBorrower, tempBorrowingDays);
 
@@ -115,11 +115,11 @@ public class BookView {
 
         if(!handelChoice()) return;
 
-        borrowerBooksDto = borrowBookController.findBorrowedBooksByBorrowerCni(choice);
+        borrowerBooksDto = borrowBookController.findBorrowedBooksByBorrowerCni(ViewHelper.choice);
 
         if (borrowerBooksDto == null) return;
 
-        tempBorrower = borrowerController.findBorrowerByCni(choice);
+        tempBorrower = borrowerController.findBorrowerByCni(ViewHelper.choice);
 
         borrowerBooksDto.getBorrower().setId(tempBorrower.getId());
 
@@ -128,10 +128,10 @@ public class BookView {
         while (true) {
             Printer.set("Enter book id");
             if(!handelChoice()) return;
-            if (checkifBookExist(choice)) break;
+            if (checkifBookExist(ViewHelper.choice)) break;
         }
 
-        tempBook = bookController.findBookById(Integer.parseInt(choice));
+        tempBook = bookController.findBookById(Integer.parseInt(ViewHelper.choice));
         tempBook.setStatus(BookStatus.AVAILABLE.toString());
 
         borrowBookController.returnBorrowBook(tempBook, borrowerBooksDto.getId());
@@ -150,14 +150,7 @@ public class BookView {
         return result.get();
     }
 
-    public static boolean  handelChoice(){
-        choice = ViewHelper.getChoice();
-        if (choice.equals("stop")) {
-            Printer.success("Stopping Operation");
-            return false;
-        }
-        return true;
-    }
+
 
 
     public static void reset(){
@@ -174,21 +167,36 @@ public class BookView {
         else borrowerBooksDto.initializeObject();
 
         tempQuantity = null;
-        choice = null;
+        ViewHelper.choice = null;
         tempBorrowingDays = 0;
 
     }
 
 
-    public static void showAllStatistic() {
-        Printer.printClass(statisticController.getTotalStatistics());
-    }
+    public static void updateBook() {
+        reset();
 
-    public static void showBookStatics() {
-        while (true){
-            Printer.set("Enter book isbn");
-            if(!handelChoice()) return;
-            if(statisticController.show(choice)) break;
-        }
+        Printer.set("Enter book isbn");
+
+        if(!handelChoice()) return;
+
+        tempBook = bookController.findBookByIsbn(ViewHelper.choice);
+
+        if (tempBook == null) return;
+
+        Printer.set("Enter book title");
+        tempBook.setTitle(ViewHelper.getChoice());
+
+        Printer.set("Enter book author");
+        tempBook.setAuthor(ViewHelper.getChoice());
+
+        Printer.set("Enter book status");
+        tempBook.setStatus(ViewHelper.getChoice());
+
+        Printer.set("Enter book shelf number");
+        tempBook.setShelfNumber(Integer.parseInt(ViewHelper.getChoice()));
+
+        Printer.printClass(bookController.updateBooksByIsbn(tempBook));
+
     }
 }

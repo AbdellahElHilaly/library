@@ -1,8 +1,11 @@
-package org.example.app.view;
+package org.example.app.view.app_view;
 
 
 import org.example.app.shared.Helper.Printer;
 import org.example.app.shared.Helper.ViewHelper;
+import org.example.app.view.data_view.BookView;
+import org.example.app.view.data_view.BorrowerView;
+import org.example.app.view.data_view.StatisticView;
 
 
 public class Menu {
@@ -26,6 +29,9 @@ public class Menu {
             case "a bk":
                 BookView.addBook();
                 break;
+            case "u bk":
+                BookView.updateBook();
+                break;
             case "br bk":
                 BookView.borrowBook();
                 break;
@@ -35,10 +41,14 @@ public class Menu {
             case "l a bk":
                 BookView.listAllBooks();
                 break;
+            case "ch lb st":
+                StatisticView.showLibrrayStatistic();
+                break;
+            case "ch bk st":
+                StatisticView.showBookStatics();
+                break;
             case "ch a st":
-                BookView.showAllStatistic();
-                break;case "ch b st":
-                BookView.showBookStatics();
+                StatisticView.showAllStatics();
                 break;
             case "rt bk":
                 BookView.returnBook();
@@ -70,6 +80,8 @@ public class Menu {
         Printer.printKeyVal("br bk", "Borrow book");
         Printer.printKeyVal("rt bk", "Return book");
 
+        Printer.printKeyVal("u bk", "update book by isbn");
+
         Printer.printKeyVal("l a br", "List all users");
         Printer.printKeyVal("l a bk", "List all books");
 
@@ -79,8 +91,9 @@ public class Menu {
         Printer.printKeyVal("d br", "Remove user by identity");
         Printer.printKeyVal("d bk", "Remove book by id");
 
-        Printer.printKeyVal("ch a st", "Show all statistics");
-        Printer.printKeyVal("ch b st", "Show book statistics");
+        Printer.printKeyVal("ch lb st", "Show statistics about library");
+        Printer.printKeyVal("ch bk st", "Show book statistics");
+        Printer.printKeyVal("ch a st", "Show total books  statistics");
 
     }
 

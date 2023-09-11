@@ -11,8 +11,6 @@ public class DatabaseConfig {
 
 
 
-
-
     public static final String DATABASE_TYPE = "mysql";
     public static final String HOST = "localhost";
     public static final String PORT = "3306";

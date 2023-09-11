@@ -62,4 +62,8 @@ public class BookController {
 
         return null;
     }
+
+    public Book updateBooksByIsbn(Book tempBook) {
+        return bookService.updateByIsbn(tempBook);
+    }
 }

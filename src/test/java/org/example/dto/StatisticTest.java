@@ -18,6 +18,12 @@ public class StatisticTest extends TestCase {
 
         Printer.printClass(statisticService.getBookStatisticsDto("978-3-16-148410-0"));
     }
+    public  void testGetAllIsbnStatistic(){
+        StatisticService statisticService = new StatisticService();
+
+        Printer.printClassList(statisticService.getAllIsbnStatistics());
+
+    }
 
 
 

@@ -1,5 +1,6 @@
 package org.example.dao.ORM;
 
+import org.example.app.mrs.model.entity.Book;
 import org.example.app.shared.Helper.Printer;
 import org.example.dao.Helper.DaoHelper;
 import org.example.dao.Helper.Factory;
@@ -118,5 +119,21 @@ public class CrudOperations<T> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public ResultSet updateWhere(String where, String value, T model) {
+        try {
+            String[][] fields = DaoHelper.getClassFields(modelClass);
+            String[] values = DaoHelper.getClassValues(model);
+            String query = Factory.getSqlQueries().updateWhere(tableName, fields, values, where, value);
+            this.statement.execute(query);
+            fields = null;
+            values = null;
+            query = null;
+            return this.findBy(where, value);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

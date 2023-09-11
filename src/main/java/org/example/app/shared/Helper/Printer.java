@@ -1,10 +1,5 @@
 package org.example.app.shared.Helper;
 
-import org.example.app.mrs.model.dto.BorrowerBooksDto;
-import org.example.app.mrs.model.entity.Book;
-import org.example.app.mrs.model.entity.Borrower;
-import org.example.dao.Helper.PrintHelper;
-
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
@@ -82,7 +77,7 @@ public class Printer {
     public static void set(String message) {
         tempColor = "reset";
         print(message + ": ");
-        endl();
+        endl(1);
     }
 
     public static <T> void printKeyVal(T key, String val) {
@@ -90,7 +85,7 @@ public class Printer {
         print(key + " : ");
         tempColor = "cyan";
         print(val);
-        endl();
+        endl(1);
     }
 
 
@@ -107,8 +102,10 @@ public class Printer {
     }
 
 
-    protected static void endl() {
-        System.out.println();
+    protected static void endl(int i) {
+        for (int j = 0; j < i; j++) {
+            System.out.println();
+        }
     }
 
 
@@ -153,6 +150,12 @@ public class Printer {
         System.out.println("-------------------------------end list---------------------------------------");
 
 
+    }
+
+    public static void debug(String message) {
+        tempColor = "purple";
+        print(message);
+        endl(1);
     }
 }
 

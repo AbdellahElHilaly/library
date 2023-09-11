@@ -43,8 +43,9 @@ public class BookRepository extends BaseRepository<Book> {
             throw new RuntimeException(e);
         }
     }
+
     public ResultSet getBooksStatisticsByIsbn(String isbn) {
-        String sql = "SELECT " +
+        String sql = "SELECT isbn," +
                 "COUNT(*) AS QuantityTotal, " +
                 "SUM(CASE WHEN status = 'BORROWED' THEN 1 ELSE 0 END) AS QuantityBorrowed, " +
                 "SUM(CASE WHEN status = 'AVAILABLE' THEN 1 ELSE 0 END) AS QuantityAvailable, " +
@@ -54,6 +55,7 @@ public class BookRepository extends BaseRepository<Book> {
         try {
             resultSet = this.statement.executeQuery(sql);
             if (!resultSet.next()) {
+                Printer.error("No books found");
                 return resultSet;
             }
             return resultSet;
@@ -62,5 +64,31 @@ public class BookRepository extends BaseRepository<Book> {
             throw new RuntimeException(e);
         }
     }
+
+    public ResultSet getAllIsbnStatistics() {
+        String sql = "SELECT " +
+                "isbn, " +
+                "COUNT(*) AS QuantityTotal, " +
+                "SUM(CASE WHEN status = 'BORROWED' THEN 1 ELSE 0 END) AS QuantityBorrowed, " +
+                "SUM(CASE WHEN status = 'AVAILABLE' THEN 1 ELSE 0 END) AS QuantityAvailable, " +
+                "SUM(CASE WHEN status = 'LOST' THEN 1 ELSE 0 END) AS QuantityLost " +
+                "FROM book " +
+                "GROUP BY isbn";
+
+        try {
+            resultSet = this.statement.executeQuery(sql);
+            resultSet = this.statement.executeQuery(sql);
+            if (!resultSet.next()) {
+                Printer.error("No books found");
+                return resultSet;
+            }
+            return resultSet;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
 }

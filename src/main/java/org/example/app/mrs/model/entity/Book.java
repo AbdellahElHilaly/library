@@ -73,6 +73,10 @@ public class Book extends ModelMapper<Book>{
     public void setId(int bookId) {
         this.id = bookId;
     }
+
+    public String getISBN() {
+        return this.ISBN;
+    }
 }
 
 

@@ -62,4 +62,7 @@ public class BookService implements CrudService<Book> {
     }
 
 
+    public Book updateByIsbn(Book tempBook) {
+        return tempBook.mapData(bookRepository.updateWhere("isbn", tempBook.getISBN(), tempBook));
+    }
 }

@@ -1,9 +1,10 @@
 package org.example;
 
 
-import org.example.app.shared.Helper.Printer;
-import org.example.app.view.DrawLogo;
-import org.example.app.view.Menu;
+import org.example.app.view.app_view.Authentication;
+import org.example.app.view.app_view.DrawLogo;
+import org.example.app.view.app_view.Initialize;
+import org.example.app.view.app_view.Menu;
 
 import java.sql.SQLException;
 
