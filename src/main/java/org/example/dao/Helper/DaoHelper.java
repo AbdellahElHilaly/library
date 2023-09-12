@@ -101,6 +101,7 @@ public class DaoHelper {
             else {
                 field.set(instance, value);
             }
+
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         }

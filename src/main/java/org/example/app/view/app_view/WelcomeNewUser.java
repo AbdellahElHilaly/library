@@ -5,7 +5,7 @@ import org.example.app.shared.Helper.ViewHelper;
 import org.example.app.controller.LibraryController;
 import org.example.app.mrs.model.entity.Library;
 
-public class Initialize {
+public class WelcomeNewUser {
 
 
     private static String choice;

@@ -73,6 +73,7 @@ public class CrudOperations<T> {
 
             DaoHelper.convertToSqlValues(fields, values);
 
+
             String query = Factory.getSqlQueries().insertInto(tableName, fields, values);
             this.statement.execute(query, Statement.RETURN_GENERATED_KEYS);
 

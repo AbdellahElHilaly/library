@@ -9,6 +9,7 @@ public class Printer {
     protected static String tempColor;
     protected static String tempEmoji;
     protected static String tempStatus;
+    protected final static String space = " ";
     protected final static String line = "----------------------------------------";
     protected static final Map<String, String> colorsCode = Map.of(
             "red", "\033[1;31m",
@@ -70,7 +71,7 @@ public class Printer {
         print(status);
         print(emoji.get(tempEmoji));
         lineEnd();
-        print("  " + message);
+        print(space+ message);
         System.out.println();
     }
 
@@ -155,6 +156,12 @@ public class Printer {
     public static void debug(String message) {
         tempColor = "purple";
         print(message);
+        endl(1);
+    }
+
+    public static void url(String filePath) {
+        tempColor = "cyan";
+        print(space + filePath);
         endl(1);
     }
 }

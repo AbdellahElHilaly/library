@@ -1,5 +1,6 @@
 package org.example.dao.database.sql;
 
+import org.example.app.shared.Helper.Printer;
 import org.example.dao.Helper.SqlHelper;
 
 import java.util.Arrays;
@@ -62,6 +63,8 @@ public abstract class SqlQueries {
     }
 
     public String insertInto(String tableName, String[][] fields, String[] values) {
+
+
         String columns = Arrays.stream(fields)
                 .skip(1) // Skip the first element (the id field)
                 .map(field -> field[1])

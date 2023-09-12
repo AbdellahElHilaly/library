@@ -1,5 +1,6 @@
 package org.example.dao.ORM;
 
+import org.example.app.shared.Helper.Printer;
 import org.example.dao.Helper.DaoHelper;
 
 import java.lang.reflect.Field;
@@ -9,38 +10,8 @@ import java.util.List;
 
 public abstract class ModelMapper<T> {
 
-    private T instance;
+    private T instance ;
     private final List<T> dataList = new ArrayList<>();
-
-//    public T mapData(ResultSet resultSet) {
-//
-//        if(resultSet == null) return null;
-//        try {
-//            instance = createInstance();
-//
-//            ResultSetMetaData rsmd = null;
-//
-//            rsmd = resultSet.getMetaData();
-//            int columnsNumber = rsmd.getColumnCount();
-//
-//            for (int i = 1; i <= columnsNumber; i++) {
-//                String columnName = rsmd.getColumnName(i);
-//                Object columnValue = resultSet.getObject(i);
-//
-//                DaoHelper.setFieldByName(instance, columnName, columnValue); //pass instance by reference
-//                columnName = null;
-//                columnValue = null; //free memory
-//            }
-//            rsmd = null;
-//
-//            return instance;
-//
-//
-//        } catch (SQLException | IllegalAccessException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//    }
 
 
     public T mapData(ResultSet resultSet) {
@@ -72,10 +43,6 @@ public abstract class ModelMapper<T> {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
 
 
     public List<T> mapDataList(ResultSet resultSet) {
@@ -129,8 +96,43 @@ public abstract class ModelMapper<T> {
         }
     }
 
+    public String[] toArrayHeader() {
+
+        Field[] fields = this.getClass().getDeclaredFields();
+        String[] header = new String[fields.length];
+        for (int i = 0; i < fields.length; i++) {
+            header[i] = fields[i].getName();
+        }
+
+        return header;
 
 
+    }
+
+    public String[] toArrayValue() {
+
+        Field[] fields = this.getClass().getDeclaredFields();
+        String[] values = new String[fields.length];
 
 
+        for (int i = 0; i < fields.length; i++) {
+            fields[i].setAccessible(true);
+
+            String fieldName = fields[i].getName();
+            String fieldValue;
+
+            try {
+                Object value = fields[i].get(this);
+                fieldValue = value != null ? value.toString() : "null";
+            } catch (IllegalAccessException e) {
+                fieldValue = "N/A";
+            }
+            values[i] = fieldValue;
+        }
+        return values;
+    }
+
+    public String getModelName() {
+        return this.getClass().getSimpleName();
+    }
 }

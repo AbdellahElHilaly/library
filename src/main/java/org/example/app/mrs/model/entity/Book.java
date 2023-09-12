@@ -16,7 +16,7 @@ public class Book extends ModelMapper<Book>{
         this.author = author;
         this.title = title;
         this.ISBN = ISBN;
-        this.status = BookStatus.AVAILABLE.toString();
+        this.status = BookStatus.AVAILABLE.name();
     }
 
     public Book() {

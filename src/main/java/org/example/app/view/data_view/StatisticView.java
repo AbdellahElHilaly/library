@@ -26,7 +26,16 @@ public class StatisticView {
         Printer.printClassList(statisticController.getAllStatistics());
     }
 
+    public static void showAllStatisticsEvolution() {
+        Printer.printClassList(statisticController.getAllStatisticsEvolution());
+    }
+
     public static void buckupAllStatistics() {
         statisticController.buckupAllStatistics();
+    }
+
+
+    public static void buckupStatisticsEvolution() {
+        statisticController.buckupStatisticsEvolution();
     }
 }

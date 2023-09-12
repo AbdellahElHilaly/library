@@ -13,8 +13,7 @@ import java.util.List;
 public class BookService implements CrudService<Book> {
     private Book tempBook = new Book();
     BookRepository bookRepository = new BookRepository();
-    LibraryRepository libraryRepository = new LibraryRepository();
-    StatisticsDto statisticsDto = new StatisticsDto();
+
 
     ResultSet resultSet = null;
 
