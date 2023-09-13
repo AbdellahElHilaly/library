@@ -4,7 +4,7 @@ import org.example.app.mrs.model.dto.StatisticsDto;
 import org.example.app.mrs.model.entity.StatisticsEvolution;
 import org.example.app.mrs.service.impl.StatisticService;
 import org.example.app.mrs.service.impl.StatisticsEvolutionService;
-import org.example.app.shared.Helper.Printer;
+import org.example.app.shared.Helper.print.Printer;
 
 public class StatisticInitializerController {
 

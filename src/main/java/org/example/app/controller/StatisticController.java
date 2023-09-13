@@ -7,8 +7,9 @@ import org.example.app.mrs.model.entity.StatisticsEvolution;
 import org.example.app.mrs.service.impl.BookService;
 import org.example.app.mrs.service.impl.StatisticService;
 import org.example.app.mrs.service.impl.StatisticsEvolutionService;
-import org.example.app.shared.Helper.Printer;
-import org.example.app.shared.Helper.FileHelper;
+import org.example.app.shared.Helper.print.ObjectPrinter;
+import org.example.app.shared.Helper.print.Printer;
+import org.example.app.shared.Helper.file.FileHelper;
 
 import java.util.List;
 
@@ -31,9 +32,9 @@ public class StatisticController {
             Printer.error("Book not found");
             return false;
         }
-        Printer.printClass(book);
+        ObjectPrinter.printClass(book);
 
-        Printer.printClass(statisticService.getBookStatisticsDto(isbn));
+        ObjectPrinter.printClass(statisticService.getBookStatisticsDto(isbn));
         return true;
     }
 

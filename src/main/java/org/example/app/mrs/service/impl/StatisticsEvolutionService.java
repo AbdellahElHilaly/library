@@ -3,7 +3,6 @@ package org.example.app.mrs.service.impl;
 import org.example.app.mrs.model.entity.StatisticsEvolution;
 import org.example.app.mrs.repository.StatisticsEvolutionRepository;
 import org.example.app.mrs.service.CrudService;
-import org.example.app.shared.Helper.Printer;
 
 import java.util.List;
 

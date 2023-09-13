@@ -1,7 +1,7 @@
 package org.example.app.mrs.model.dto;
 
 import org.example.app.mrs.model.entity.Borrower;
-import org.example.app.shared.Helper.Printer;
+import org.example.app.shared.Helper.print.ObjectPrinter;
 import org.example.dao.ORM.ModelMapper;
 
 import java.sql.ResultSet;
@@ -47,8 +47,8 @@ public class BorrowerBooksDto  extends ModelMapper<BorrowerBooksDto> {
 
 
     public void show() {
-        Printer.printClass(this.borrower);
-        Printer.printClassList(this.booksDto);
+        ObjectPrinter.printClass(this.borrower);
+        ObjectPrinter.printClassList(this.booksDto);
     }
 
     public Borrower getBorrower() {

@@ -2,7 +2,8 @@ package org.example.app.view.data_view;
 
 import org.example.app.controller.BorrowerController;
 import org.example.app.mrs.model.entity.Borrower;
-import org.example.app.shared.Helper.Printer;
+import org.example.app.shared.Helper.print.ObjectPrinter;
+import org.example.app.shared.Helper.print.Printer;
 import org.example.app.shared.Helper.ViewHelper;
 
 public class BorrowerView {
@@ -12,7 +13,7 @@ public class BorrowerView {
 
 
     public static void addBorrower() {
-        Printer.printClass( borrowerController.addBorrower(setBorrower()));
+        ObjectPrinter.printClass( borrowerController.addBorrower(setBorrower()));
     }
 
     private static Borrower setBorrower() {
@@ -46,7 +47,7 @@ public class BorrowerView {
 
 
     public static void listAllBorrowers() {
-        Printer.printClassList(borrowerController.findAllBorrowers());
+        ObjectPrinter.printClassList(borrowerController.findAllBorrowers());
     }
 }
 

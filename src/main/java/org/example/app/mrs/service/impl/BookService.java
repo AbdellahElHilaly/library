@@ -1,11 +1,8 @@
 package org.example.app.mrs.service.impl;
 
-import org.example.app.mrs.model.dto.StatisticsDto;
 import org.example.app.mrs.model.entity.Book;
-import org.example.app.mrs.repository.LibraryRepository;
 import org.example.app.mrs.service.CrudService;
 import org.example.app.mrs.repository.BookRepository;
-import org.example.app.shared.Helper.Printer;
 
 import java.sql.ResultSet;
 import java.util.List;

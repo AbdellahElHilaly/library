@@ -2,7 +2,8 @@ package org.example.app.controller;
 
 import org.example.app.mrs.model.entity.Book;
 import org.example.app.mrs.service.impl.BookService;
-import org.example.app.shared.Helper.Printer;
+import org.example.app.shared.Helper.print.ObjectPrinter;
+import org.example.app.shared.Helper.print.Printer;
 import org.example.app.shared.Helper.ViewHelper;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class BookController {
     public Book findBookById(int bookId) {
         tempBook = bookService.select(bookId);
         if (tempBook != null) {
-            Printer.printClass(tempBook);
+            ObjectPrinter.printClass(tempBook);
             return tempBook;
         }
 

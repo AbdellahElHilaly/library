@@ -3,12 +3,12 @@ package org.example.app.view.data_view;
 import org.example.app.controller.BookController;
 import org.example.app.controller.BorrowBookController;
 import org.example.app.controller.BorrowerController;
-import org.example.app.controller.StatisticController;
 import org.example.app.mrs.model.dto.BorrowerBooksDto;
 import org.example.app.mrs.model.entity.Book;
 import org.example.app.mrs.model.entity.BorrowBook;
 import org.example.app.mrs.model.entity.Borrower;
-import org.example.app.shared.Helper.Printer;
+import org.example.app.shared.Helper.print.ObjectPrinter;
+import org.example.app.shared.Helper.print.Printer;
 import org.example.app.shared.Helper.ViewHelper;
 import org.example.app.shared.util.enums.BookStatus;
 
@@ -39,7 +39,7 @@ public class BookView {
         if (!handelChoice()) return;
         tempQuantity = ViewHelper.choice;
 
-        Printer.printClassList(bookController.addBooks(setBook(), tempQuantity));
+        ObjectPrinter.printClassList(bookController.addBooks(setBook(), tempQuantity));
     }
 
     private static Book setBook() {
@@ -60,7 +60,7 @@ public class BookView {
     }
 
     public static void listAllBooks() {
-        Printer.printClassList(bookController.findAllBooks());
+        ObjectPrinter.printClassList(bookController.findAllBooks());
     }
 
     public static void borrowBook() {
@@ -196,7 +196,7 @@ public class BookView {
         Printer.set("Enter book shelf number");
         tempBook.setShelfNumber(Integer.parseInt(ViewHelper.getChoice()));
 
-        Printer.printClass(bookController.updateBooksByIsbn(tempBook));
+        ObjectPrinter.printClass(bookController.updateBooksByIsbn(tempBook));
 
     }
 }

@@ -1,7 +1,6 @@
 package org.example.dao.ORM;
 
-import org.example.app.mrs.model.entity.Book;
-import org.example.app.shared.Helper.Printer;
+import org.example.app.shared.Helper.print.Printer;
 import org.example.dao.Helper.DaoHelper;
 import org.example.dao.Helper.Factory;
 import org.example.dao.database.connection.Connection;
@@ -9,7 +8,6 @@ import org.example.dao.database.connection.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Map;
 
 public class CrudOperations<T> {
 

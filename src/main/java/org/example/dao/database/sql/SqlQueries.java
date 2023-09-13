@@ -1,6 +1,5 @@
 package org.example.dao.database.sql;
 
-import org.example.app.shared.Helper.Printer;
 import org.example.dao.Helper.SqlHelper;
 
 import java.util.Arrays;

@@ -13,17 +13,18 @@ import java.sql.SQLException;
 public class App {
     public static void main(String[] args) throws SQLException {
 
-//        DrawLogo.start();
+        DrawLogo.start();
 
-//        WelcomeNewUser.start();
+        WelcomeNewUser.start();
 
-//        Authentication.start();
+        Authentication.start();
 
         PrepareApp.start();
 
         Menu.start();
 
     }
+
 
 
 

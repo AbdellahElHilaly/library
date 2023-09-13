@@ -1,6 +1,5 @@
 package org.example.dao.ORM;
 
-import org.example.app.shared.Helper.Printer;
 import org.example.dao.Helper.DaoHelper;
 
 import java.lang.reflect.Field;

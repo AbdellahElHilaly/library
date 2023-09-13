@@ -1,7 +1,7 @@
 package org.example.app.view.app_view;
 
 
-import org.example.app.shared.Helper.Printer;
+import org.example.app.shared.Helper.print.Printer;
 import org.example.app.shared.Helper.ViewHelper;
 import org.example.app.view.data_view.BookView;
 import org.example.app.view.data_view.BorrowerView;
