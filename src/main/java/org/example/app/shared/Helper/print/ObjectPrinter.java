@@ -5,31 +5,58 @@ import java.util.List;
 
 public class ObjectPrinter extends Printer {
 
-    private static int maxSize ;
+    private static int[] maxSizes ;
 
-    private static void generateMawFiledSize(String header, String s) {
-        maxSize = header.length();
-        if (s.length() > maxSize) {
-            maxSize = s.length();
+    private static void generateMawFiledSize(String[] headers, String[] body) {
+        maxSizes = new int[headers.length];
+        for (int i = 0; i < headers.length; i++) {
+            maxSizes[i] = headers[i].length();
+        }
+
+        for (int i = 0; i < body.length; i++) {
+            if (body[i].length() > maxSizes[i]) {
+                maxSizes[i] = body[i].length();
+            }
         }
     }
 
 
-    private static void printVCases() {
-        tempColor = "cyan";
+    private static <T> void generateMaxFiledSize(List<T> models){
+        if (models.isEmpty()) {
+            return;
+        }
+        maxSizes = new int[ObjectHelper.getModelHeader(models.get(0)).length];
+        String[] headers = ObjectHelper.getModelHeader(models.get(0));
+        for (int i = 0; i < headers.length; i++) {
+            if (headers[i].length() > maxSizes[i]) {
+                maxSizes[i] = headers[i].length();
+            }
+        }
+        for (T model : models) {
+            String[] body = ObjectHelper.getModelBody(model);
+            for (int i = 0; i < body.length; i++) {
+                if (body[i].length() > maxSizes[i]) {
+                    maxSizes[i] = body[i].length();
+                }
+            }
+        }
+    }
+
+
+    private static void printVCases(String color) {
+        tempColor = color;
         print("|");
         printSpace(1);
     }
 
-    private static void printHCase(String[] headers, String[] body, String cyan) {
-        tempColor = cyan;
+    private static void printHCase(String[] headers, String[] body, String color , String symbol) {
+        tempColor = color;
         int realSpace;
         int add = 3;
         for (int i = 0; i < headers.length; i++) {
-            generateMawFiledSize(headers[i], body[i]);
-            realSpace = maxSize + add;
+            realSpace = maxSizes[i] + add;
             for (int j = 0; j < realSpace; j++) {
-                print("-");
+                print(symbol);
             }
         }
         endl(1);
@@ -82,53 +109,50 @@ public class ObjectPrinter extends Printer {
     }
 
     private static void printTableHeader(String[] headers, String[] body) {
-        printHCase(headers, body, "cyan");
+        printHCase(headers, body, "yellow","=");
         int realSize;
 
         for (int i = 0; i < headers.length; i++) {
-
             if (i >= 1) printSpace(1);
-            printVCases();
+            printVCases("yellow");
 
-            tempColor = "yellow";
+            tempColor = "cyan";
             print(headers[i]);
-            generateMawFiledSize(headers[i], body[i]);
-            realSize = maxSize - headers[i].length();
+            realSize = maxSizes[i] - headers[i].length();
             if (i >= 1) printSpace(realSize);
-
         }
 
-        printVCases();
+        printVCases("yellow");
         endl(1);
-        printHCase(headers, body, "cyan");
+        printHCase(headers, body, "yellow","=");
 
 
     }
 
 
-    public static void printTableBody(String[] headers, String[] body) {
+    private static void printTableBody(String[] headers, String[] body) {
         int realSize;
         for (int i = 0; i < headers.length; i++) {
 
             if (i >= 1) printSpace(1);
-            printVCases();
+            printVCases("green");
 
-            tempColor = "green";
+            tempColor = "white";
             print(body[i]);
-            generateMawFiledSize(headers[i], body[i]);
-            realSize = maxSize - body[i].length();
+            realSize = maxSizes[i] - body[i].length();
             if (i >= 1) printSpace(realSize);
         }
 
-        printVCases();
+        printVCases("green");
         endl(1);
-        printHCase(headers, body, "cyan");
+        printHCase(headers, body, "green","-");
     }
 
 
     public static <T> void printModelTable(T model) {
         String[] headers = ObjectHelper.getModelHeader(model);
         String[] body = ObjectHelper.getModelBody(model);
+        generateMawFiledSize(headers, body);
         printTableHeader(headers, body);
         printTableBody(headers, body);
 
@@ -138,35 +162,13 @@ public class ObjectPrinter extends Printer {
         if (models.isEmpty()) {
             return;
         }
-
-        // Calculate the maximum field size for all objects
-        int maxSize = calculateMaxFieldSize(models);
-
-        // Print table header
         String[] headers = ObjectHelper.getModelHeader(models.get(0));
-        for (int i = 0; i < headers.length; i++) {
-            if (i >= 1) printSpace(1);
-            printCase("cyan");
-            tempColor = "yellow";
-            print(headers[i]);
-            printSpace(maxSize - headers[i].length());
-        }
-        printCase("cyan");
-        endl(1);
-
-        // Print table body
+        generateMaxFiledSize(models);
+        printTableHeader(headers, ObjectHelper.getModelBody(models.get(0)));
         for (T model : models) {
-            String[] body = ObjectHelper.getModelBody(model);
-            for (int i = 0; i < body.length; i++) {
-                if (i >= 1) printSpace(1);
-                printCase("cyan");
-                tempColor = "green";
-                print(body[i]);
-                printSpace(maxSize - body[i].length());
-            }
-            printCase("cyan");
-            endl(1);
+            printTableBody(headers, ObjectHelper.getModelBody(model));
         }
+
     }
 
 
@@ -178,28 +180,6 @@ public class ObjectPrinter extends Printer {
 
 
 
-    private static int calculateMaxFieldSize(List<?> objects) {
-        int maxSize = 0;
-        for (Object object : objects) {
-            Class<?> clazz = object.getClass();
-            Field[] fields = clazz.getDeclaredFields();
-            for (Field field : fields) {
-                field.setAccessible(true);
-                String fieldValue;
-                try {
-                    Object value = field.get(object);
-                    fieldValue = value != null ? value.toString() : "null";
-                    int fieldSize = fieldValue.length();
-                    if (fieldSize > maxSize) {
-                        maxSize = fieldSize;
-                    }
-                } catch (IllegalAccessException e) {
-                    // Handle the exception or log it as needed
-                }
-            }
-        }
-        return maxSize;
-    }
 
 
 }
