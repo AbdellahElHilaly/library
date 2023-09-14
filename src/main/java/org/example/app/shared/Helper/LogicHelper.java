@@ -40,6 +40,16 @@ public class LogicHelper {
     public static String formatDateTime(Date date) {
         return dateTileFormat.format(date);
     }
+
+    public static String[] handelHeaderToPrint(String[] modelHeader) {
+        modelHeader[0] = "index";
+        return modelHeader;
+    }
+
+    public static String[] handelBodyToPrint(String[] modelBody, int i) {
+        modelBody[0] = String.valueOf(i);
+        return modelBody;
+    }
 }
 
 

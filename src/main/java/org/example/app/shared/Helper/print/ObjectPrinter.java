@@ -1,5 +1,7 @@
 package org.example.app.shared.Helper.print;
 
+import org.example.app.shared.Helper.LogicHelper;
+
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -7,7 +9,7 @@ public class ObjectPrinter extends Printer {
 
     private static int[] maxSizes ;
 
-    private static void generateMawFiledSize(String[] headers, String[] body) {
+    private static void generateMaxFiledSize(String[] headers, String[] body) {
         maxSizes = new int[headers.length];
         for (int i = 0; i < headers.length; i++) {
             maxSizes[i] = headers[i].length();
@@ -18,10 +20,11 @@ public class ObjectPrinter extends Printer {
                 maxSizes[i] = body[i].length();
             }
         }
+
     }
 
 
-    private static <T> void generateMaxFiledSize(List<T> models){
+    private static <T> void generateGlobalMaxFiledSize(List<T> models){
         if (models.isEmpty()) {
             return;
         }
@@ -32,8 +35,9 @@ public class ObjectPrinter extends Printer {
                 maxSizes[i] = headers[i].length();
             }
         }
+        int k = 1;
         for (T model : models) {
-            String[] body = ObjectHelper.getModelBody(model);
+            String[] body = ObjectHelper.getModelBody(model , k++);
             for (int i = 0; i < body.length; i++) {
                 if (body[i].length() > maxSizes[i]) {
                     maxSizes[i] = body[i].length();
@@ -59,15 +63,10 @@ public class ObjectPrinter extends Printer {
                 print(symbol);
             }
         }
+        print(symbol);
         endl(1);
     }
 
-
-    private static void printCase(String color) {
-        tempColor = color;
-        print("|");
-        printSpace(1);
-    }
 
 
     public static void printField(String key, String value) {
@@ -108,6 +107,10 @@ public class ObjectPrinter extends Printer {
         System.out.println("-------------------------------end list---------------------------------------");
     }
 
+
+
+
+
     private static void printTableHeader(String[] headers, String[] body) {
         printHCase(headers, body, "yellow","=");
         int realSize;
@@ -115,11 +118,11 @@ public class ObjectPrinter extends Printer {
         for (int i = 0; i < headers.length; i++) {
             if (i >= 1) printSpace(1);
             printVCases("yellow");
-
             tempColor = "cyan";
             print(headers[i]);
             realSize = maxSizes[i] - headers[i].length();
             if (i >= 1) printSpace(realSize);
+            if (i==headers.length - 1) printSpace(1);
         }
 
         printVCases("yellow");
@@ -132,6 +135,7 @@ public class ObjectPrinter extends Printer {
 
     private static void printTableBody(String[] headers, String[] body) {
         int realSize;
+
         for (int i = 0; i < headers.length; i++) {
 
             if (i >= 1) printSpace(1);
@@ -140,8 +144,10 @@ public class ObjectPrinter extends Printer {
             tempColor = "white";
             print(body[i]);
             realSize = maxSizes[i] - body[i].length();
-            if (i >= 1) printSpace(realSize);
+            printSpace(realSize);
+            if (i==headers.length - 1) printSpace(1);
         }
+
 
         printVCases("green");
         endl(1);
@@ -150,9 +156,9 @@ public class ObjectPrinter extends Printer {
 
 
     public static <T> void printModelTable(T model) {
-        String[] headers = ObjectHelper.getModelHeader(model);
-        String[] body = ObjectHelper.getModelBody(model);
-        generateMawFiledSize(headers, body);
+        String[] headers = LogicHelper.handelHeaderToPrint(ObjectHelper.getModelHeader(model));
+        String[] body = LogicHelper.handelBodyToPrint(ObjectHelper.getModelBody(model , 1) , 1);
+        generateMaxFiledSize(headers, body);
         printTableHeader(headers, body);
         printTableBody(headers, body);
 
@@ -163,23 +169,14 @@ public class ObjectPrinter extends Printer {
             return;
         }
         String[] headers = ObjectHelper.getModelHeader(models.get(0));
-        generateMaxFiledSize(models);
-        printTableHeader(headers, ObjectHelper.getModelBody(models.get(0)));
-        for (T model : models) {
-            printTableBody(headers, ObjectHelper.getModelBody(model));
+        String[][] bodies = ObjectHelper.getModelsBody(models);
+        generateGlobalMaxFiledSize(models);
+        printTableHeader(headers, ObjectHelper.getModelBody(models.get(0) , 1));
+        for (String[] body : bodies) {
+            printTableBody(headers, body);
         }
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }
