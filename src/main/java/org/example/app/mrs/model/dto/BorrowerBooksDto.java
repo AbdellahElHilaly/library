@@ -1,8 +1,8 @@
 package org.example.app.mrs.model.dto;
 
 import org.example.app.mrs.model.entity.Borrower;
-import org.example.app.shared.Helper.print.ObjectPrinter;
-import org.example.dao.ORM.ModelMapper;
+import org.example.framwork.console.print.ObjectPrinter;
+import org.example.framwork.dao.ORM.ModelMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

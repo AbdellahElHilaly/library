@@ -7,7 +7,7 @@ import org.example.app.mrs.model.entity.Borrower;
 import org.example.app.mrs.service.impl.BookService;
 import org.example.app.mrs.service.impl.BorrowBookService;
 import org.example.app.shared.Helper.LogicHelper;
-import org.example.app.shared.Helper.print.Printer;
+import org.example.framwork.console.print.Printer;
 
 import java.util.Date;
 

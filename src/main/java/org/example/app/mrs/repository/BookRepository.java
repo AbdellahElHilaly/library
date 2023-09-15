@@ -1,8 +1,8 @@
 package org.example.app.mrs.repository;
 
 import org.example.app.mrs.model.entity.Book;
-import org.example.app.shared.Helper.print.Printer;
-import org.example.dao.ORM.BaseRepository;
+import org.example.framwork.console.print.Printer;
+import org.example.framwork.dao.ORM.BaseRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,8 +1,8 @@
 package org.example.app.view.data_view;
 
 import org.example.app.controller.StatisticController;
-import org.example.app.shared.Helper.print.ObjectPrinter;
-import org.example.app.shared.Helper.print.Printer;
+import org.example.framwork.console.print.ObjectPrinter;
+import org.example.framwork.console.print.Printer;
 import org.example.app.shared.Helper.ViewHelper;
 
 import static org.example.app.shared.Helper.ViewHelper.handelChoice;

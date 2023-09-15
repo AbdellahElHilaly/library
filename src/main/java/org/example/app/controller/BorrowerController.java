@@ -2,7 +2,7 @@ package org.example.app.controller;
 
 import org.example.app.mrs.model.entity.Borrower;
 import org.example.app.mrs.service.impl.BorrowerService;
-import org.example.app.shared.Helper.print.Printer;
+import org.example.framwork.console.print.Printer;
 
 import java.util.List;
 

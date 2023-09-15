@@ -1,6 +1,6 @@
 package org.example.app.shared.Helper;
 
-import org.example.app.shared.Helper.print.Printer;
+import org.example.framwork.console.print.Printer;
 import org.example.app.view.app_view.Menu;
 
 import java.util.Scanner;

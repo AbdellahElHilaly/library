@@ -1,6 +1,6 @@
 package org.example.app.view.app_view;
 
-import org.example.app.shared.Helper.print.Printer;
+import org.example.framwork.console.print.Printer;
 
 public class DrawLogo extends Printer {
 

@@ -4,7 +4,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.example.app.shared.Helper.print.Printer;
+import org.example.framwork.console.print.Printer;
 
 import javax.swing.*;
 import java.io.BufferedWriter;

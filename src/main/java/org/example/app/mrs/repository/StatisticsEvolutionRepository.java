@@ -2,7 +2,7 @@ package org.example.app.mrs.repository;
 
 import org.example.app.mrs.model.entity.StatisticsEvolution;
 import org.example.app.shared.Helper.LogicHelper;
-import org.example.dao.ORM.BaseRepository;
+import org.example.framwork.dao.ORM.BaseRepository;
 
 import java.sql.ResultSet;
 import java.util.Date;

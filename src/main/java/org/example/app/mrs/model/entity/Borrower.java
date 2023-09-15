@@ -1,6 +1,6 @@
 package org.example.app.mrs.model.entity;
 
-import org.example.dao.ORM.ModelMapper;
+import org.example.framwork.dao.ORM.ModelMapper;
 
 public class Borrower extends ModelMapper<Borrower> {
     private int  id;

@@ -7,8 +7,8 @@ import org.example.app.mrs.model.entity.StatisticsEvolution;
 import org.example.app.mrs.service.impl.BookService;
 import org.example.app.mrs.service.impl.StatisticService;
 import org.example.app.mrs.service.impl.StatisticsEvolutionService;
-import org.example.app.shared.Helper.print.ObjectPrinter;
-import org.example.app.shared.Helper.print.Printer;
+import org.example.framwork.console.print.ObjectPrinter;
+import org.example.framwork.console.print.Printer;
 import org.example.app.shared.Helper.file.FileHelper;
 
 import java.util.List;

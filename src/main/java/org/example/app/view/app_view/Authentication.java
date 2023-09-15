@@ -2,7 +2,7 @@ package org.example.app.view.app_view;
 
 import org.example.app.mrs.model.entity.Library;
 import org.example.app.mrs.service.impl.LibraryService;
-import org.example.app.shared.Helper.print.Printer;
+import org.example.framwork.console.print.Printer;
 import org.example.app.shared.Helper.ViewHelper;
 
 public class Authentication {

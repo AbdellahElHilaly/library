@@ -2,8 +2,8 @@ package org.example.app.view.data_view;
 
 import org.example.app.controller.BorrowerController;
 import org.example.app.mrs.model.entity.Borrower;
-import org.example.app.shared.Helper.print.ObjectPrinter;
-import org.example.app.shared.Helper.print.Printer;
+import org.example.framwork.console.print.ObjectPrinter;
+import org.example.framwork.console.print.Printer;
 import org.example.app.shared.Helper.ViewHelper;
 
 public class BorrowerView {
